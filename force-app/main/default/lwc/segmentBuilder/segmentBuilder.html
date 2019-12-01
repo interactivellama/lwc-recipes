@@ -1,0 +1,313 @@
+<template>
+    <div id="conditionalGroupIsOr1">
+        Conditional Group:
+        <!-- TODO: tooltip with directions -->
+        <lightning-button-stateful
+            label-when-off="AND"
+            label-when-on="OR"
+            selected={conditionalGroupIsOr}
+            onclick={handleConditionalGroupClick}
+            variant="text"
+        >
+        </lightning-button-stateful>
+    </div>
+    <ul>
+        <li>
+            <!-- <lightning-combobox
+                name="and-or"
+                label="Conditional Group"
+                value="and"
+                placeholder="Select Group condition"
+                options={conditionToggleOptions}
+            ></lightning-combobox> -->
+            <ul aria-describedby="conditionalGroupIsOr1">
+                <li class="slds-box">
+                    <!-- Should be able to be gone through one at time-->
+                    <span id="aggregate-rule-heading"
+                        >Aggregate condition: Sales Order Product</span
+                    >
+                    <span> Count</span>
+                    <span> At least</span>
+                    <span> 10</span>
+                    <div id="conditionalGroupIsOr2">
+                        Conditional Group:
+                        <!-- TODO: tooltip with directions -->
+                        <lightning-button-stateful
+                            label-when-off="AND"
+                            label-when-on="OR"
+                            selected={conditionalGroupIsOr2}
+                            onclick={handleConditionalGroupClick2}
+                            variant="text"
+                        >
+                        </lightning-button-stateful>
+                    </div>
+                    <ul
+                        class="aggregate-rules-panel-closed"
+                        aria-describedby="conditionalGroupIsOr2"
+                    >
+                        <li>
+                            <span>First Name</span>
+                            <span> is equal to</span>
+                            <span> Stephen</span>
+                        </li>
+                        <li>
+                            <span>Last Name</span>
+                            <span> is equal to</span>
+                            <span> James</span>
+                        </li>
+                    </ul>
+                    <div
+                        class="aggregate-closed-rule-actions slds-m-top_medium"
+                    >
+                        <button
+                            aria-controls="aggregate-children"
+                            aria-expanded={ruleIsOpen}
+                            onclick={handleAggregateRuleOpenClick}
+                            aria-describedby="aggregate-rule-heading"
+                        >
+                            Edit Rule
+                        </button>
+                        <button
+                            onclick={handleDeleteClicked}
+                            aria-describedby="aggregate-rule-heading"
+                        >
+                            Delete Rule
+                        </button>
+                    </div>
+                    <div
+                        class="aggregate-panel  slds-box"
+                        id="aggregate-children"
+                    >
+                        <lightning-button-stateful
+                            label-when-off="AND"
+                            label-when-on="OR"
+                            selected={conditionalGroupIsOr2}
+                            onclick={handleConditionalGroupClick2}
+                            variant="text"
+                        >
+                        </lightning-button-stateful>
+                        <!-- <lightning-combobox
+                            name="and-or"
+                            label="Conditional Group"
+                            value="and"
+                            placeholder="Select Group condition"
+                            options={andOrPicklistOptions}
+                        ></lightning-combobox> -->
+                        <ul class="aggregate-rules" role="group">
+                            <li>
+                                <!-- can't be disabled, can be readonly-->
+                                <lightning-combobox
+                                    name="first-name"
+                                    label="Attribute"
+                                    value="first-name"
+                                    placeholder="Select First Name"
+                                    options={picklistOptions}
+                                    onchange={handlePicklistChange}
+                                ></lightning-combobox>
+
+                                <lightning-combobox
+                                    name="conditions"
+                                    label="Condition"
+                                    value="is-equal-to"
+                                    placeholder="Select condition"
+                                    options={conditionalPicklistOptions}
+                                    onchange={handleConditionalPicklistChange}
+                                ></lightning-combobox>
+
+                                <lightning-input
+                                    type="text"
+                                    name="first-name-value"
+                                    label="Enter a value"
+                                    value="Stephen"
+                                ></lightning-input>
+                            </li>
+                            <li>
+                                <div class="slds-m-padding_small">
+                                    <lightning-button-icon
+                                        icon-name="utility:add"
+                                        alternative-text="Add Rule"
+                                    ></lightning-button-icon>
+                                </div>
+                            </li>
+                        </ul>
+                        <button onclick={handleAggregatePanelCloseClick}>
+                            Cancel
+                        </button>
+                        <button onclick={handleAggregatePanelCloseClick}>
+                            Done
+                        </button>
+                    </div>
+                </li>
+
+                <!-- Profile rule -->
+                <li>
+                    <div id="conditionalGroupIsOr3">
+                        Conditional Group:
+                        <!-- TODO: tooltip with directions -->
+                        <lightning-button-stateful
+                            label-when-off="AND"
+                            label-when-on="OR"
+                            selected={conditionalGroupIsOr3}
+                            onclick={handleConditionalGroupClick3}
+                            variant="text"
+                        >
+                        </lightning-button-stateful>
+                    </div>
+                    <!-- <lightning-combobox
+                        name="and-or"
+                        label="Conditional Group"
+                        value="or"
+                        placeholder="Select Group condition"
+                        options={conditionToggleOptions}
+                    ></lightning-combobox> -->
+                    <ul aria-describedby="conditionalGroupIsOr3">
+                        <li aria-expanded="false" class="slds-box">
+                            <div class="profile-rule-panel-closed">
+                                <span id="profile-rule-heading"
+                                    >Number of Days on File</span
+                                >
+                                <span> greater than</span>
+                                <span> 365</span>
+                            </div>
+                            <div
+                                class="closed-profile-rule-actions  slds-m-top_medium"
+                            >
+                                <button
+                                    aria-controls="profile-rule"
+                                    aria-expanded={profileRuleIsOpen}
+                                    onclick={handleProfileRuleOpenClick}
+                                    aria-describedby="profile-rule-heading"
+                                >
+                                    Edit Rule
+                                </button>
+                                <button
+                                    onclick={handleDeleteClicked}
+                                    aria-describedby="profile-rule-heading"
+                                >
+                                    Delete Rule
+                                </button>
+                            </div>
+                            <div
+                                class="profile-rule-panel"
+                                id="profile-rule-children"
+                            >
+                                <ul class="profile-rules" role="group">
+                                    <li>
+                                        <!-- can't be disabled, can be readonly-->
+                                        <lightning-combobox
+                                            name="first-name"
+                                            label="Attribute"
+                                            value="first-name"
+                                            placeholder="Select First Name"
+                                            options={picklistOptions}
+                                            onchange={handlePicklistChange}
+                                        ></lightning-combobox>
+
+                                        <lightning-combobox
+                                            name="conditions"
+                                            label="Condition"
+                                            value="is-equal-to"
+                                            placeholder="Select condition"
+                                            options={conditionalPicklistOptions}
+                                            onchange={handleConditionalPicklistChange}
+                                        ></lightning-combobox>
+
+                                        <lightning-input
+                                            type="text"
+                                            name="first-name-value"
+                                            label="Enter a value"
+                                            value="Stephen"
+                                        ></lightning-input>
+                                        <button>Move rule</button>
+                                        <button>Group Rule</button>
+                                    </li>
+                                </ul>
+                                <button onclick={handleProfilePanelCloseClick}>
+                                    Cancel
+                                </button>
+                                <button onclick={handleProfilePanelCloseClick}>
+                                    Done
+                                </button>
+                            </div>
+                        </li>
+                        <li aria-expanded="false" class="slds-box">
+                            <div class="profile-rule-panel-closed">
+                                <span id="profile-rule-heading-3"
+                                    >Number of Days on File</span
+                                >
+                                <span> less than</span>
+                                <span> 500</span>
+                            </div>
+                            <div
+                                class="closed-profile-rule-actions  slds-m-top_medium"
+                            >
+                                <button
+                                    aria-controls="profile-rule"
+                                    aria-expanded={profileRuleIsOpen}
+                                    onclick={handleProfileRuleOpenClick}
+                                    aria-describedby="profile-rule-heading-3"
+                                >
+                                    Edit Rule
+                                </button>
+                                <button
+                                    onclick={handleDeleteClicked}
+                                    aria-describedby="profile-rule-heading-3"
+                                >
+                                    Delete Rule
+                                </button>
+                            </div>
+                            <div
+                                class="profile-rule-panel"
+                                id="profile-rule-children-3"
+                            >
+                                <ul class="profile-rules" role="group">
+                                    <li>
+                                        <!-- can't be disabled, can be readonly-->
+                                        <lightning-combobox
+                                            name="first-name"
+                                            label="Attribute"
+                                            value="first-name"
+                                            placeholder="Select First Name"
+                                            options={picklistOptions}
+                                            onchange={handlePicklistChange}
+                                        ></lightning-combobox>
+
+                                        <lightning-combobox
+                                            name="conditions"
+                                            label="Condition"
+                                            value="is-equal-to"
+                                            placeholder="Select condition"
+                                            options={conditionalPicklistOptions}
+                                            onchange={handleConditionalPicklistChange}
+                                        ></lightning-combobox>
+
+                                        <lightning-input
+                                            type="text"
+                                            name="first-name-value"
+                                            label="Enter a value"
+                                            value="Stephen"
+                                        ></lightning-input>
+                                        <button>Move rule</button>
+                                        <button>Group Rule</button>
+                                    </li>
+                                </ul>
+                                <button onclick={handleProfilePanelCloseClick}>
+                                    Cancel
+                                </button>
+                                <button onclick={handleProfilePanelCloseClick}>
+                                    Done
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <lightning-button-icon
+                icon-name="utility:add"
+                alternative-text="Add Rule"
+            ></lightning-button-icon>
+        </li>
+    </ul>
+</template>
