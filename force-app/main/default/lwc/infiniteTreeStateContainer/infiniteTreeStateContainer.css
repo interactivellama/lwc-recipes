@@ -1,0 +1,6 @@
+/* @import '@salesforce/slds/legacy'; */
+
+.state-container {
+    height: 500px;
+    width: 275px;
+}

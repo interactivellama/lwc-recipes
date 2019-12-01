@@ -1,0 +1,57 @@
+/* @import '@salesforce/slds/legacy'; */
+
+.infinite-tree {
+    min-height: 100%;
+    /* border: 1px solid #dddbda; */
+    background: #fff;
+    min-width: 200px;
+}
+
+.panel-container {
+    position: relative;
+}
+
+.slds-panel_docked {
+    position: relative;
+    min-width: 15rem;
+    height: 100%;
+    border-radius: 0;
+    display: none;
+}
+
+.slds-panel_docked.slds-is-open {
+    display: block;
+}
+.slds-panel_docked-left {
+    -webkit-box-shadow: 1px 0 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.25);
+}
+.slds-panel_docked-right {
+    margin-left: auto;
+    -webkit-box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+}
+.slds-panel_animated {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    -webkit-transform: translate3d(120%, 0, 0);
+    transform: translate3d(120%, 0, 0);
+    -webkit-transition: -webkit-transform 300ms ease;
+    transition: -webkit-transform 300ms ease;
+    transition: transform 300ms ease;
+    transition: transform 300ms ease, -webkit-transform 300ms ease;
+    z-index: 9000;
+}
+
+.slds-tabs-mobile__container .slds-panel_animated {
+    position: fixed;
+}
+
+.slds-panel_animated.slds-is-open {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}

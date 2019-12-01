@@ -1,0 +1,136 @@
+/* @import '@salesforce/slds/legacy'; */
+
+.slds-grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.slds-col,
+[class*='slds-col_padded'],
+[class*='slds-col--padded'] {
+    /* -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto; */
+}
+
+.slds-col:last-child {
+    flex-grow: 1;
+}
+
+.slds-truncate {
+    flex: 1;
+    /* max-width: 100%; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.infinite-tree-button-group {
+    white-space: nowrap;
+}
+
+.infinite-tree-button-group .slds-button {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-right: 1px solid #dddbda;
+    -webkit-transition: border 0.15s linear;
+    transition: border 0.15s linear;
+    background-color: white;
+    height: 2.25rem;
+    margin-left: 0;
+    border-radius: 0;
+}
+
+.slds-button + .slds-button {
+    margin-left: 0rem;
+}
+
+.infinite-tree-button-group button:first-child {
+    border-left: none;
+}
+
+.slds-panel__header {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0.75rem;
+}
+.slds-panel__header_custom {
+    padding: 0.75rem 1rem;
+}
+.slds-panel__close:first-child {
+    margin-right: 0.5rem;
+}
+
+.slds-panel__close:last-child {
+    margin-left: 0.5rem;
+}
+.slds-panel__back:first-child {
+    margin-right: 0.5rem;
+}
+
+.slds-panel__back:last-child {
+    margin-left: 0.5rem;
+}
+
+.slds-panel__close,
+.slds-panel__back {
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+.slds-panel__header_align-center {
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+}
+
+.slds-panel__header_align-center .slds-panel__header-title {
+    text-align: center;
+}
+
+.slds-panel__header_align-center .slds-panel__close {
+    position: absolute;
+    right: 0.75rem;
+    left: auto;
+    top: 50%;
+    margin-top: -0.75rem;
+}
+
+.slds-panel__header_align-center .slds-panel__back {
+    position: absolute;
+    left: 0.75rem;
+    right: auto;
+    top: 50%;
+    margin-top: -0.75rem;
+}
+
+.slds-panel__header-title {
+    text-align: start;
+    width: 100%;
+}
+
+.slds-text-heading--small,
+.slds-text-heading_small {
+    font-size: 1rem;
+    line-height: 1.25;
+}
+
+.flex-parent {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dddbda;
+}
+
+.long-and-truncated {
+    flex: 1;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

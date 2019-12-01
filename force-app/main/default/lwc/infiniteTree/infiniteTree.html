@@ -1,0 +1,25 @@
+<template>
+    <div class="infinite-tree">
+        <template if:false={isRoot}>
+            <c-infinite-tree-header
+                path={path}
+                label={headerLabel}
+            ></c-infinite-tree-header>
+        </template>
+        <div class="panel-container">
+            <div
+                class="slds-is-open"
+                aria-hidden="true"
+            >
+                <c-infinite-tree-item
+                    is-root
+                    items={children}
+                    onbranchclicked={handleClickBranch}
+                    current-node={currentNode}
+                    path={path}
+                >
+                </c-infinite-tree-item>
+            </div>
+        </div>
+    </div>
+</template>

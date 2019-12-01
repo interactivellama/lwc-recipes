@@ -1,0 +1,47 @@
+<template>
+    <div class="flex-parent">
+        <div class="infinite-tree-button-group">
+          <button
+                class="slds-button slds-button_icon slds-button_icon-small"
+                title="Root Level"
+                onclick={handleClickHome}
+            >
+                <lightning-primitive-icon
+                    if:true={showIcon}
+                    icon-name="utility:home"
+                    size="x-small"
+                ></lightning-primitive-icon
+                ><span class="slds-assistive-text">Root Level</span>
+            </button>
+            <button
+                class="slds-button slds-button_icon slds-button_icon-small"
+                title="Show ancestor menu"
+            >
+                <lightning-primitive-icon
+                    if:true={showIcon}
+                    icon-name="utility:threedots"
+                    size="x-small"
+                ></lightning-primitive-icon
+                ><span class="slds-assistive-text">Show ancestor menu</span>
+            </button>
+            <button
+                class="slds-button slds-button_icon slds-button_icon-small"
+                title="Back"
+                onclick={handleClickBack}
+            >
+                <lightning-primitive-icon
+                    if:true={showIcon}
+                    icon-name="utility:back"
+                    size="x-small"
+                ></lightning-primitive-icon
+                ><span class="slds-assistive-text">Back</span>
+            </button>
+        </div>
+        <h2
+            class="long-and-truncated slds-text-heading--small slds-panel__header_align-center"
+            title={label}
+        >
+            <span>{label}</span>
+        </h2>
+    </div>
+</template>
