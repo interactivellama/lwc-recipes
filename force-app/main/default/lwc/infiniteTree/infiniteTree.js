@@ -9,17 +9,29 @@ export default class cInfiniteTree extends LightningElement {
     @track _childNodes;
     @track _currentNode;
     @track _path;
-
+    @track _hasTransitioned = true;
+    @track _drillIn = true;
+    @track _drillOut = false;
+    
     constructor() {
         super();
         this.template.addEventListener(
-            'private_click_item',
-            this.handleItemClick.bind(this)
+            'private_select',
+            this.handleItemSelect.bind(this)
         );
         this.template.addEventListener(
-            'request_path_change',
-            this.handlePathChange.bind(this)
+            'private_request_path_change_in',
+            this.handlePathChangeIn.bind(this)
         );
+        this.template.addEventListener(
+          'private_request_path_change_out',
+          this.handlePathChangeOut.bind(this)
+      );
+    }
+
+    @api
+    get hasTransitioned() {
+      return this._hasTransitioned;
     }
 
     @api
@@ -73,7 +85,6 @@ export default class cInfiniteTree extends LightningElement {
 
         const treeRoot = this.treedata.parse(this.items, this.selectedItem);
         this._childNodes = treeRoot ? treeRoot.children : [];
-        console.log(this._childNodes);
         this._selectedItem = treeRoot.selectedItem;
         this._key = this._childNodes.length > 0 ? treeRoot.key : null;
         if (this._key) {
@@ -100,20 +111,56 @@ export default class cInfiniteTree extends LightningElement {
             : undefined;
     }
 
-    handleItemClick(event) {
-        const treeIndex = event.detail.treeIndex;
+    get computedPanelClass() {
+      return classSet('panel-transition-out')
+          .add({
+              'hide': !this._hasTransitioned,
+              'show-in': this._hasTransitioned && this._drillIn,
+              'show-out': this._hasTransitioned && this._drillOut
+          })
+          .toString();
+  }
+
+    handleItemSelect(event) {
+        const treeIndex = event.detail.data.treeIndex;
         this.dispatchSelectEvent(treeIndex);
     }
 
-    handlePathChange(event) {
+    handlePathChangeIn(event) {
         const customEvent = new CustomEvent('request_path_change', {
             bubbles: true,
             composed: true,
             cancelable: true,
             detail: { ...event.detail }
         });
-        this.dispatchEvent(customEvent);
+
+        this._hasTransitioned = false;
+        this._drillOut = false;
+        this._drillIn = true;
+
+        setTimeout(() => {
+          this.dispatchEvent(customEvent);
+          this._hasTransitioned = true;
+        }, 0)
     }
+
+    handlePathChangeOut(event) {
+      const customEvent = new CustomEvent('request_path_change', {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+          detail: { ...event.detail }
+      });
+
+      this._hasTransitioned = false;
+      this._drillOut = true;
+      this._drillIn = false;
+
+      setTimeout(() => {
+        this.dispatchEvent(customEvent);
+        this._hasTransitioned = true;
+      }, 0)
+  }
 
     dispatchSelectEvent(treeIndex) {
         if (treeIndex) {

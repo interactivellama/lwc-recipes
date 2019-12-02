@@ -5,6 +5,24 @@ import { classSet } from 'c/utils';
 const DEFAULT_SIZE = 'medium';
 const DEFAULT_VARIANT = 'square';
 
+const createAndDispatchPrivateEvent = ({
+  this: that,
+  name,
+  originalEvent,
+  data
+}) => {
+  const customEvent = new CustomEvent(name, {
+      bubbles: true,
+      composed: true,
+      cancelable: true,
+      detail: {
+          originalEvent,
+          data: { ...data }
+      }
+  });
+  that.dispatchEvent(customEvent);
+};
+
 export default class cInfiniteTreeItem extends LightningElement {
     @track _label = '';
     @track _isRoot = false;
@@ -13,6 +31,7 @@ export default class cInfiniteTreeItem extends LightningElement {
     @track _items;
     @track _isLeaf = false;
     @track _currentNode;
+    @track _hasTransitioned = true;
     _index = 0;
 
     @api get label() {
@@ -21,6 +40,15 @@ export default class cInfiniteTreeItem extends LightningElement {
 
     set label(value) {
         this._label = value;
+    }
+
+    @api get hasTransitioned() {
+      return this._hasTransitioned;
+    }
+    
+    set hasTransitioned(value) {
+      console.log(this._hasTransitioned)
+      this._hasTransitioned = value;
     }
 
     get item() {
@@ -131,17 +159,29 @@ export default class cInfiniteTreeItem extends LightningElement {
             : child;
     }
 
-    handleClick(event) {
-        const customEvent = new CustomEvent('private_click_item', {
-            bubbles: true,
-            composed: true,
-            cancelable: true,
-            detail: {
-                treeIndex: String(this._index),
-                target: 'item'
-            }
-        });
-        this.dispatchEvent(customEvent);
+    
+
+    handleBranchClick(event) {
+      createAndDispatchPrivateEvent({
+        this: this,
+        name: 'private_request_path_change_in',
+        originalEvent: event,
+        data: {
+            // pass current path with current branch clicked added
+            path: this._path.concat([String(this._index)]),
+        }
+      });
+    }
+
+    handleItemClick(event) {
+      createAndDispatchPrivateEvent({
+        this: this,
+        name: 'private_select',
+        originalEvent: event,
+        data: {
+            treeIndex: String(this._index),
+        }
+      });
     }
 
     @api

@@ -8,8 +8,7 @@
         </template>
         <div class="panel-container">
             <div
-                class="slds-is-open"
-                aria-hidden="true"
+                class={computedPanelClass}
             >
                 <c-infinite-tree-item
                     is-root
@@ -17,6 +16,7 @@
                     onbranchclicked={handleClickBranch}
                     current-node={currentNode}
                     path={path}
+                    has-transitioned={hasTransitioned}
                 >
                 </c-infinite-tree-item>
             </div>

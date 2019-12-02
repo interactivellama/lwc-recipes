@@ -51,21 +51,58 @@ const items = [
                 ]
             }
         ]
-    }
+    },
+    {
+      label: 'Northern Sales Director',
+      name: '9',
+      items: [
+          {
+              label: 'Northern Sales Manager',
+              name: '10',
+              items: [
+                  {
+                      label: 'MT Sales Rep',
+                      name: '11',
+                      variableType: 'text',
+                      items: []
+                  },
+                  {
+                      label: 'MN Sales Rep',
+                      name: '12',
+                      variableType: 'text',
+                      items: []
+                  }
+              ]
+          }
+      ]
+  },
+  {
+    label: 'Southern Sales Director',
+    name: '13',
+    items: [
+        {
+            label: 'Southern Sales Manager',
+            name: '14',
+            items: [
+                {
+                    label: 'TX Sales Rep',
+                    name: '15',
+                    variableType: 'text',
+                    items: []
+                },
+                {
+                    label: 'NM Sales Rep',
+                    name: '16',
+                    variableType: 'text',
+                    items: []
+                }
+            ]
+        }
+    ]
+  },
 ];
 
-const mapping = {
-    '1': 'Western Sales Director',
-    '2': 'Western Sales Manager',
-    '3': 'CA Sales Rep',
-    '4': 'OR Sales Rep',
-    '5': 'Eastern Sales Director',
-    '6': 'Eastern Sales Manager',
-    '7': 'NY Sales Rep',
-    '8': 'MA Sales Rep'
-};
-
-const initialState = { path: [0, 0] };
+const initialState = { path: [] };
 
 export default class cInfiniteTreeStateContainer extends LightningElement {
     @track treeList = items;
@@ -75,23 +112,20 @@ export default class cInfiniteTreeStateContainer extends LightningElement {
         super();
         this.pathList = initialState.path;
         this.template.addEventListener(
-            'select',
-            this.handleClickBranch.bind(this)
-        );
-        this.template.addEventListener(
             'request_path_change',
             this.handlePathChange.bind(this)
         );
-    }
-
-    handleClickBranch(e) {
-        if (e.detail) {
-            this.pathList = this.pathList.concat([e.detail.treeIndex]);
-            console.log(this.pathList);
-        }
+        this.template.addEventListener(
+          'select',
+          this.handleSelect.bind(this)
+      );
     }
 
     handlePathChange(e) {
         this.pathList = e.detail.data.path;
+    }
+
+    handleSelect(e) {
+        console.log('Item Selected:', e.detail);
     }
 }

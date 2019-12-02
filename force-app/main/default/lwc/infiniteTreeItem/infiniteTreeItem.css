@@ -34,6 +34,7 @@
     color: #2b2826;
     font-size: 1rem;
     padding: 0 0.75rem;
+    width: 275px;
 }
 
 .slds-infinite-tree-list__item:active {

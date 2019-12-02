@@ -11,6 +11,7 @@
                 tree-index={item.index}
                 item-type={item.value.variableType}
                 is-leaf={item.value.isLeaf}
+                path={path}
             >
             </c-infinite-tree-item>
             <!-- all branches/items -->
@@ -23,7 +24,7 @@
             <div class={computedItemClass}>
                 <button
                     class="slds-button slds-button_full-width"
-                    onclick={handleClick}
+                    onclick={handleBranchClick}
                 >
                     <span class="slds-truncate infinite-tree-folder" title={label}>{label}</span>
                     <lightning-primitive-icon
@@ -37,7 +38,7 @@
         <!-- item -->
         <template if:true={isLeaf}>
             <div class={computedItemClass}>
-                <button class="slds-button slds-button_full-width">
+                <button class="slds-button slds-button_full-width" onclick={handleItemClick}>
                     <span class="slds-truncate" title={label}>{label}</span>
                     </span><lightning-primitive-icon
                         if:true={showIcon}

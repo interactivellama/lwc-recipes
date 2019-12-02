@@ -30,7 +30,7 @@ export default class cInfiniteTreeHeader extends LightningElement {
     handleClickBack(event) {
         createAndDispatchPrivateEvent({
             this: this,
-            name: 'request_path_change',
+            name: 'private_request_path_change_out',
             originalEvent: event,
             data: {
                 // remove last item in array
@@ -42,7 +42,7 @@ export default class cInfiniteTreeHeader extends LightningElement {
     handleClickHome(event) {
         createAndDispatchPrivateEvent({
             this: this,
-            name: 'request_path_change',
+            name: 'private_request_path_change_out',
             originalEvent: event,
             data: {
                 // clear path

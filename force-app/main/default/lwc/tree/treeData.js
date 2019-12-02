@@ -81,7 +81,6 @@ export class TreeData {
         const seen = new WeakSet();
         let _selectedItem = null;
         function buildTree(currentNode, parent, level, childNum) {
-            console.log(currentNode);
             if (isNodeValid(currentNode, level)) {
                 const node = getTreeNode(
                     currentNode,
